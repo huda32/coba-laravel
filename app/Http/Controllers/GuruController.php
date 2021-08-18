@@ -32,5 +32,15 @@ class GuruController extends Controller
         return view('v_detailguru',$data);
     }
 
+    public function add()
+    {
+        return view('v_addguru');
+    }
+
+    public function insert()
+    {
+        
+    }
+
    
 }

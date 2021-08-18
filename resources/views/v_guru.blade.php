@@ -2,10 +2,7 @@
 @section('title','Guru')
 
 @section('content')
-   {{-- @foreach ($guru as $data)
-   NIM : {{$data['nip']}}<br>
-   Nama : {{$data['nama']}}<br>
-   Mapel : {{$data['mapel']}}<br> --}}
+   <a href="/guru/add" class="btn btn-primary btn-sm">ADD</a>
       
    <table class="table table-bordered">
       <thead>
