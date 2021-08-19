@@ -19,4 +19,8 @@ class GuruModel extends Model
        ->where('id_guru', $id_guru)
        ->first();
    }
+
+   public function addData($data){
+    DB::table('tbl_guru')->insert($data);
+   }
 }
