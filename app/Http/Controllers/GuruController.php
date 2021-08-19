@@ -73,5 +73,62 @@ class GuruController extends Controller
         ->with('pesan', 'Data Berhasil Ditambahkan !!!');
     }
 
+    public function edit($id_guru)
+    {
+        if(!$this->GuruModel->detailData($id_guru)){
+            abort(404);
+        }
+        $data = [
+            'guru' => $this->GuruModel->detailData($id_guru),
+        ];
+        return view('v_editguru', $data);
+    }
+
+    public function update($id_guru)
+    {
+        Request()->validate([
+            // 'nip' => 'required|unique:tbl_guru,nip|min:4|max:5',
+            'nama_guru' => 'required',
+            'mapel' => 'required',
+            
+        ],[
+            'nip.required' => 'Wajib Diisi!!',
+            'nip.min' => 'Minimal 4 Karakter!!',
+            'nip.max' => 'Maximal 5 karakter!',
+            'nama_guru.required' => 'Wajib Diisi!!',
+            'mapel.required' => 'Wajib Diisi!!',
+          
+        ]);
+
+        if(Request()->foto_guru <> "")
+        {   //jika ingin ganti foto
+            $file = Request()->foto_guru;
+            $fileName = Request()->nip . '.' . $file->extension();
+            $file->move(public_path('foto_guru'), $fileName);
+    
+            $data = [
+                'nip' => Request()->nip,
+                'nama_guru' => request()->nama_guru,
+                'mapel' => request()->mapel,
+                'foto_guru' => $fileName,
+            ];
+    
+            $this->GuruModel->editData($id_guru, $data);
+        }else{
+            //jika tidak ingin ganti foto
+            $data = [
+                'nip' => Request()->nip,
+                'nama_guru' => request()->nama_guru,
+                'mapel' => request()->mapel,   
+            ];
+    
+            $this->GuruModel->editData($id_guru, $data);
+        }
+        ///jika ter validasi
+        //upload gambar / foto
+      
+        return redirect()->route('guru')
+        ->with('pesan', 'Data Berhasil Di Update !!!');
+    }
    
 }
