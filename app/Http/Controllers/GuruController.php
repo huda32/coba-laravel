@@ -11,6 +11,7 @@ class GuruController extends Controller
     public function __construct()
     {
         $this->GuruModel = new GuruModel();
+        $this->middleware('auth');
     }
 
     public function index()
