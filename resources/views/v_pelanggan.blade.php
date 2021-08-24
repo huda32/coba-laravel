@@ -1,6 +1,6 @@
 @extends('layout.v_template')
-@section('title','User')
+@section('title','Pelanggan')
     
 @section('content')
-    <h1>Ini halaman User</h1>
+    <h1>Ini halaman Pelanggan</h1>
 @endsection
